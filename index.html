@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise 🎉</title>
+<title>Birthday Surprise</title>
 
 <style>
 
@@ -15,103 +15,123 @@ text-align:center;
 color:white;
 }
 
-/* Gift */
+/* intro text */
+
+#intro{
+position:absolute;
+top:40%;
+left:50%;
+transform:translateX(-50%);
+font-size:40px;
+font-weight:bold;
+}
+
+/* gift */
 
 #gift{
+display:none;
 position:absolute;
-top:50%;
+top:55%;
 left:50%;
 transform:translate(-50%,-50%);
 font-size:120px;
 cursor:pointer;
-transition:0.3s;
 }
 
-#gift:hover{
-transform:translate(-50%,-50%) scale(1.2);
-}
+/* popup */
 
-/* Beating heart */
+#popup{
 
-#mainHeart{
-position:absolute;
+position:fixed;
+
 top:50%;
 left:50%;
+
 transform:translate(-50%,-50%);
-font-size:150px;
+
+width:650px;
+height:380px;
+
+background:#ff2d55;
+
+border-radius:25px;
+
+box-shadow:0 10px 40px rgba(0,0,0,0.5);
+
 display:none;
+
+overflow:hidden;
+
+}
+
+/* glowing heart background */
+
+#heart{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+font-size:180px;
+
+opacity:.15;
+
 animation:beat 1s infinite;
+
 }
 
 @keyframes beat{
+
 0%{transform:translate(-50%,-50%) scale(1)}
 50%{transform:translate(-50%,-50%) scale(1.2)}
 100%{transform:translate(-50%,-50%) scale(1)}
+
 }
 
-/* birthday text */
+/* message */
 
 #message{
+
 position:absolute;
-top:60%;
-left:50%;
-transform:translateX(-50%);
+
+top:40%;
+width:100%;
+
 font-size:40px;
+
 font-weight:bold;
-display:none;
+
 }
 
-/* floating items */
+/* floating icons */
 
-.item{
+.float{
+
 position:absolute;
-bottom:-100px;
-font-size:40px;
-animation:float linear infinite;
+
+bottom:-50px;
+
+font-size:35px;
+
+animation:floatUp linear infinite;
+
 }
 
-@keyframes float{
-0%{transform:translateY(0)}
-100%{transform:translateY(-120vh)}
+@keyframes floatUp{
+
+0%{
+transform:translateY(0);
+opacity:1;
 }
 
-/* banner popup */
-
-#banner{
-position:fixed;
-top:20px;
-left:50%;
-transform:translateX(-50%);
-background:white;
-color:#ff4081;
-padding:15px 35px;
-border-radius:30px;
-font-size:26px;
-font-weight:bold;
-box-shadow:0 8px 25px rgba(0,0,0,0.3);
-display:none;
-animation:slideDown 0.6s ease;
+100%{
+transform:translateY(-450px);
+opacity:0;
 }
 
-@keyframes slideDown{
-0%{top:-80px;opacity:0}
-100%{top:20px;opacity:1}
-}
-
-/* confetti */
-
-.confetti{
-position:absolute;
-width:10px;
-height:10px;
-top:-10px;
-animation:fall linear forwards;
-}
-
-@keyframes fall{
-to{
-transform:translateY(120vh) rotate(720deg);
-}
 }
 
 </style>
@@ -119,105 +139,92 @@ transform:translateY(120vh) rotate(720deg);
 
 <body>
 
+<div id="intro">✨ Someone Sent You a Surprise ✨</div>
+
 <div id="gift">🎁</div>
 
-<div id="mainHeart">❤️</div>
+<div id="popup">
 
-<div id="message">
-🎉 Happy Happy Birthday 🎂 🥳
+<div id="heart">❤️</div>
+
+<div id="message"></div>
+
 </div>
-
-<div id="banner"></div>
 
 <script>
 
-/* floating icons */
+/* show gift after intro */
 
-const icons=["🎈","❤️","🥳","💃","🕺","🎉","😊","😍"];
+setTimeout(()=>{
 
-function floatItems(){
+document.getElementById("intro").style.display="none";
 
-let item=document.createElement("div");
+document.getElementById("gift").style.display="block";
 
-item.className="item";
+},2500);
 
-item.innerHTML=icons[Math.floor(Math.random()*icons.length)];
 
-item.style.left=Math.random()*100+"vw";
-
-item.style.animationDuration=(6+Math.random()*5)+"s";
-
-document.body.appendChild(item);
-
-setTimeout(()=>item.remove(),9000);
-
-}
-
-/* confetti burst */
-
-function confetti(){
-
-for(let i=0;i<120;i++){
-
-let c=document.createElement("div");
-
-c.className="confetti";
-
-c.style.left=Math.random()*100+"vw";
-
-c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-
-c.style.animationDuration=(3+Math.random()*3)+"s";
-
-document.body.appendChild(c);
-
-setTimeout(()=>c.remove(),5000);
-
-}
-
-}
-
-/* repeating banner messages */
+/* birthday messages */
 
 const messages=[
+
 "🎉 Happy Happy Birthday 🎂",
-"🥳 Wishing You an Amazing Day!",
-"🎈 May Your Day Be Filled With Joy!",
-"❤️ Lots of Happiness and Smiles!",
+
+"🥳 Wishing You a Fantastic Day!",
+
+"❤️ May Your Life Be Filled With Joy!",
+
+"🎈 Have an Amazing Celebration!",
+
 "🎉 Enjoy Your Special Day!"
+
 ];
 
-function showBanner(){
+/* change message */
 
-let banner=document.getElementById("banner");
+function changeMessage(){
 
 let msg=messages[Math.floor(Math.random()*messages.length)];
 
-banner.innerHTML=msg;
-
-banner.style.display="block";
-
-setTimeout(()=>{
-banner.style.display="none";
-},3000);
+document.getElementById("message").innerHTML=msg;
 
 }
 
-/* gift click event */
+/* floating icons */
+
+const icons=["🎈","❤️","🥳","🎉","😊","😍"];
+
+function floatIcons(){
+
+let icon=document.createElement("div");
+
+icon.className="float";
+
+icon.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+
+icon.style.left=Math.random()*600+"px";
+
+icon.style.animationDuration=(3+Math.random()*3)+"s";
+
+document.getElementById("popup").appendChild(icon);
+
+setTimeout(()=>icon.remove(),6000);
+
+}
+
+/* gift click */
 
 document.getElementById("gift").onclick=function(){
 
 this.style.display="none";
 
-document.getElementById("mainHeart").style.display="block";
+document.getElementById("popup").style.display="block";
 
-document.getElementById("message").style.display="block";
+changeMessage();
 
-setInterval(floatItems,500);
+setInterval(changeMessage,3000);
 
-confetti();
-
-setInterval(showBanner,5000);
+setInterval(floatIcons,350);
 
 }
 
