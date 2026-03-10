@@ -15,7 +15,7 @@ color:white;
 text-align:center;
 }
 
-/* intro text */
+/* intro */
 
 #intro{
 position:absolute;
@@ -36,125 +36,192 @@ left:50%;
 transform:translate(-50%,-50%);
 font-size:120px;
 cursor:pointer;
+transition:transform .3s;
+}
+
+#gift:hover{
+transform:translate(-50%,-50%) scale(1.1);
 }
 
 /* popup */
 
 #popup{
-
 position:fixed;
-
 top:50%;
 left:50%;
-
 transform:translate(-50%,-50%);
-
 width:650px;
 height:420px;
-
 background:#ff2d55;
-
 border-radius:25px;
-
 box-shadow:0 10px 50px rgba(0,0,0,0.8);
-
 display:none;
-
 overflow:hidden;
-
 }
 
-/* image */
+/* photo */
 
 #photo{
-
 width:130px;
 height:130px;
-
 border-radius:50%;
-
 object-fit:cover;
-
 border:5px solid white;
-
 position:absolute;
-
 top:20px;
 left:50%;
+transform:translateX(-50%) scale(0);
+animation:photoZoom 1s forwards;
+}
 
-transform:translateX(-50%);
+@keyframes photoZoom{
+0%{transform:translateX(-50%) scale(0)}
+100%{transform:translateX(-50%) scale(1)}
+}
 
+/* sparkle */
+
+.sparkle{
+position:absolute;
+font-size:18px;
+animation:sparkleMove 2s linear forwards;
+}
+
+@keyframes sparkleMove{
+0%{opacity:1; transform:scale(.5)}
+100%{opacity:0; transform:scale(1.5) translateY(-30px)}
 }
 
 /* glowing heart */
 
 #heart{
-
 position:absolute;
-
 top:50%;
 left:50%;
-
 transform:translate(-50%,-50%);
-
 font-size:180px;
-
 opacity:.15;
-
 animation:beat 1s infinite;
-
 }
 
 @keyframes beat{
-
 0%{transform:translate(-50%,-50%) scale(1)}
 50%{transform:translate(-50%,-50%) scale(1.2)}
 100%{transform:translate(-50%,-50%) scale(1)}
-
 }
 
-/* message */
+/* banner */
 
 #message{
-
 position:absolute;
-
-top:55%;
-
-width:100%;
-
-font-size:36px;
-
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+background:white;
+color:red;
 font-weight:bold;
-
+font-size:20px;
+padding:12px;
+border-radius:12px;
+overflow:hidden;
+white-space:nowrap;
 }
 
-/* floating icons background */
+#scrollText{
+display:inline-block;
+padding-left:100%;
+animation:scrollText 12s linear infinite;
+}
+
+@keyframes scrollText{
+0%{transform:translateX(0)}
+100%{transform:translateX(-100%)}
+}
+
+/* balloons */
 
 .bgFloat{
-
 position:absolute;
-
 bottom:-50px;
-
 font-size:35px;
-
 animation:floatUp linear infinite;
-
 }
 
 @keyframes floatUp{
-
-0%{
-transform:translateY(0);
-opacity:1;
+0%{transform:translateY(0);opacity:1}
+100%{transform:translateY(-110vh);opacity:0}
 }
 
-100%{
-transform:translateY(-110vh);
-opacity:0;
+/* confetti */
+
+@keyframes confettiFall{
+0%{transform:translateY(0) rotate(0);opacity:1}
+100%{transform:translateY(100vh) rotate(720deg);opacity:0}
 }
 
+/* dancing emojis */
+
+@keyframes dance{
+0%{transform:rotate(-20deg)}
+100%{transform:rotate(20deg)}
+}
+
+/* cake */
+
+#cake{
+position:absolute;
+top:65%;
+left:50%;
+transform:translateX(-50%);
+font-size:80px;
+display:none;
+}
+
+/* love message */
+
+#loveMsg{
+position:absolute;
+top:80%;
+left:50%;
+transform:translateX(-50%);
+font-size:40px;
+font-weight:bold;
+text-shadow:0 0 10px pink,0 0 20px red;
+display:none;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{opacity:.6}
+to{opacity:1}
+}
+
+/* fireworks */
+
+.firework{
+position:fixed;
+font-size:40px;
+animation:fireworkPop 2s linear forwards;
+}
+
+@keyframes fireworkPop{
+0%{transform:scale(.2);opacity:1}
+100%{transform:scale(2);opacity:0}
+}
+
+/* heart rain */
+
+.heartRain{
+position:fixed;
+top:-20px;
+font-size:28px;
+animation:heartFall 4s linear forwards;
+}
+
+@keyframes heartFall{
+0%{transform:translateY(0);opacity:1}
+100%{transform:translateY(100vh);opacity:0}
 }
 
 </style>
@@ -162,7 +229,7 @@ opacity:0;
 
 <body>
 
-<div id="intro">✨ Someone Sent You a Surprise ✨</div>
+<div id="intro">✨ Muski ❤️ Please click Gift Icon for Surprise ✨</div>
 
 <div id="gift">🎁</div>
 
@@ -172,54 +239,34 @@ opacity:0;
 
 <div id="heart">❤️</div>
 
-<div id="message"></div>
+<div id="cake">🎂</div>
+
+<div id="message">
+<div id="scrollText">
+🎉 Happy Happy Birthday 🎂 | 🥳 Wishing You a Fantastic Day! | ❤️ May Your Life Be Filled With Joy! | 🎈 Have an Amazing Celebration! | 🎉 Enjoy Your Special Day!
+</div>
+</div>
+
+<div id="loveMsg">Love You Muski ❤️</div>
 
 </div>
 
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3c1aab6c40.mp3?filename=happy-birthday-to-you-piano-version-13976.mp3">
+</audio>
+
 <script>
 
-/* intro to gift */
+/* intro */
 
 setTimeout(()=>{
-
 document.getElementById("intro").style.display="none";
-
 document.getElementById("gift").style.display="block";
-
 },2500);
 
+/* floating balloons */
 
-/* messages */
-
-const messages=[
-
-"🎉 Happy Happy Birthday 🎂",
-
-"🥳 Wishing You a Fantastic Day!",
-
-"❤️ May Your Life Be Filled With Joy!",
-
-"🎈 Have an Amazing Celebration!",
-
-"🎉 Enjoy Your Special Day!"
-
-];
-
-
-/* change message */
-
-function changeMessage(){
-
-let msg=messages[Math.floor(Math.random()*messages.length)];
-
-document.getElementById("message").innerHTML=msg;
-
-}
-
-
-/* popup floating icons */
-
-const icons=["🎈","❤️","🥳","🎉","💃","🕺","😍"];
+const icons=["🎈","❤️","🥳","🎉"];
 
 function floatIcons(){
 
@@ -239,23 +286,157 @@ setTimeout(()=>icon.remove(),8000);
 
 }
 
-
-/* start background floating */
-
 setInterval(floatIcons,400);
 
+/* confetti */
 
-/* gift click */
+function confettiBurst(){
+
+for(let i=0;i<80;i++){
+
+let c=document.createElement("div");
+
+c.innerHTML="🎊";
+
+c.style.position="fixed";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.top="-20px";
+
+c.style.fontSize="25px";
+
+c.style.animation="confettiFall 4s linear";
+
+document.body.appendChild(c);
+
+setTimeout(()=>c.remove(),4000);
+
+}
+
+}
+
+/* dancing emojis */
+
+function dancing(){
+
+let d=document.createElement("div");
+
+d.innerHTML="💃";
+
+d.style.position="fixed";
+
+d.style.left=Math.random()*100+"vw";
+
+d.style.top=Math.random()*100+"vh";
+
+d.style.fontSize="40px";
+
+d.style.animation="dance 1s infinite alternate";
+
+document.body.appendChild(d);
+
+setTimeout(()=>d.remove(),4000);
+
+}
+
+setInterval(dancing,900);
+
+/* sparkle */
+
+function sparkle(){
+
+let photo=document.getElementById("photo");
+
+let rect=photo.getBoundingClientRect();
+
+let s=document.createElement("div");
+
+s.className="sparkle";
+
+s.innerHTML="✨";
+
+s.style.left=(rect.left+Math.random()*130)+"px";
+
+s.style.top=(rect.top+Math.random()*130)+"px";
+
+document.body.appendChild(s);
+
+setTimeout(()=>s.remove(),2000);
+
+}
+
+setInterval(sparkle,300);
+
+/* fireworks */
+
+function firework(){
+
+let f=document.createElement("div");
+
+f.className="firework";
+
+f.innerHTML="🎆";
+
+f.style.left=Math.random()*100+"vw";
+
+f.style.top=Math.random()*80+"vh";
+
+document.body.appendChild(f);
+
+setTimeout(()=>f.remove(),2000);
+
+}
+
+setInterval(firework,1500);
+
+/* heart rain */
+
+function heartRain(){
+
+for(let i=0;i<40;i++){
+
+let h=document.createElement("div");
+
+h.className="heartRain";
+
+h.innerHTML="❤️";
+
+h.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),4000);
+
+}
+
+}
+
+document.body.addEventListener("click",heartRain);
+
+/* gift open */
 
 document.getElementById("gift").onclick=function(){
 
-this.style.display="none";
+this.innerHTML="📦";
+
+setTimeout(()=>{
 
 document.getElementById("popup").style.display="block";
 
-changeMessage();
+document.getElementById("music").play();
 
-setInterval(changeMessage,3000);
+confettiBurst();
+
+setTimeout(()=>{
+document.getElementById("cake").style.display="block";
+},3000);
+
+setTimeout(()=>{
+document.getElementById("loveMsg").style.display="block";
+},6000);
+
+},800);
 
 }
 
