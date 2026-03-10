@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise 🎁</title>
+<title>Birthday Surprise 🎉</title>
 
 <style>
 
 body{
 margin:0;
 overflow:hidden;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
 font-family:Arial;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
 text-align:center;
 color:white;
 }
 
-/* gift box */
+/* Gift */
 
 #gift{
 position:absolute;
@@ -24,37 +24,44 @@ left:50%;
 transform:translate(-50%,-50%);
 font-size:120px;
 cursor:pointer;
-transition:transform .3s;
+transition:0.3s;
 }
 
 #gift:hover{
 transform:translate(-50%,-50%) scale(1.2);
 }
 
-/* popup banner */
+/* Beating heart */
 
-#banner{
-position:fixed;
-top:40%;
+#mainHeart{
+position:absolute;
+top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:white;
-color:#ff4081;
-padding:40px 60px;
-border-radius:20px;
-font-size:45px;
-font-weight:bold;
-box-shadow:0 10px 40px rgba(0,0,0,.4);
+font-size:150px;
 display:none;
-animation:popup 1s ease;
+animation:beat 1s infinite;
 }
 
-@keyframes popup{
-0%{transform:translate(-50%,-50%) scale(0)}
+@keyframes beat{
+0%{transform:translate(-50%,-50%) scale(1)}
+50%{transform:translate(-50%,-50%) scale(1.2)}
 100%{transform:translate(-50%,-50%) scale(1)}
 }
 
-/* floating objects */
+/* birthday text */
+
+#message{
+position:absolute;
+top:60%;
+left:50%;
+transform:translateX(-50%);
+font-size:40px;
+font-weight:bold;
+display:none;
+}
+
+/* floating items */
 
 .item{
 position:absolute;
@@ -68,13 +75,35 @@ animation:float linear infinite;
 100%{transform:translateY(-120vh)}
 }
 
+/* banner popup */
+
+#banner{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+color:#ff4081;
+padding:15px 35px;
+border-radius:30px;
+font-size:26px;
+font-weight:bold;
+box-shadow:0 8px 25px rgba(0,0,0,0.3);
+display:none;
+animation:slideDown 0.6s ease;
+}
+
+@keyframes slideDown{
+0%{top:-80px;opacity:0}
+100%{top:20px;opacity:1}
+}
+
 /* confetti */
 
 .confetti{
 position:absolute;
 width:10px;
 height:10px;
-background:red;
 top:-10px;
 animation:fall linear forwards;
 }
@@ -92,23 +121,30 @@ transform:translateY(120vh) rotate(720deg);
 
 <div id="gift">🎁</div>
 
-<div id="banner">
-🎉 Happy Happy Birthday 🎂 🥳 <br>
-❤️ Wishing You Lots of Happiness ❤️
+<div id="mainHeart">❤️</div>
+
+<div id="message">
+🎉 Happy Happy Birthday 🎂 🥳
 </div>
 
+<div id="banner"></div>
+
 <script>
+
+/* floating icons */
 
 const icons=["🎈","❤️","🥳","💃","🕺","🎉","😊","😍"];
 
 function floatItems(){
 
 let item=document.createElement("div");
+
 item.className="item";
 
 item.innerHTML=icons[Math.floor(Math.random()*icons.length)];
 
 item.style.left=Math.random()*100+"vw";
+
 item.style.animationDuration=(6+Math.random()*5)+"s";
 
 document.body.appendChild(item);
@@ -124,10 +160,13 @@ function confetti(){
 for(let i=0;i<120;i++){
 
 let c=document.createElement("div");
+
 c.className="confetti";
 
 c.style.left=Math.random()*100+"vw";
+
 c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+
 c.style.animationDuration=(3+Math.random()*3)+"s";
 
 document.body.appendChild(c);
@@ -138,19 +177,47 @@ setTimeout(()=>c.remove(),5000);
 
 }
 
-/* gift click surprise */
+/* repeating banner messages */
+
+const messages=[
+"🎉 Happy Happy Birthday 🎂",
+"🥳 Wishing You an Amazing Day!",
+"🎈 May Your Day Be Filled With Joy!",
+"❤️ Lots of Happiness and Smiles!",
+"🎉 Enjoy Your Special Day!"
+];
+
+function showBanner(){
+
+let banner=document.getElementById("banner");
+
+let msg=messages[Math.floor(Math.random()*messages.length)];
+
+banner.innerHTML=msg;
+
+banner.style.display="block";
+
+setTimeout(()=>{
+banner.style.display="none";
+},3000);
+
+}
+
+/* gift click event */
 
 document.getElementById("gift").onclick=function(){
 
 this.style.display="none";
 
+document.getElementById("mainHeart").style.display="block";
+
+document.getElementById("message").style.display="block";
+
 setInterval(floatItems,500);
 
 confetti();
 
-setTimeout(()=>{
-document.getElementById("banner").style.display="block";
-},1500);
+setInterval(showBanner,5000);
 
 }
 
