@@ -148,17 +148,19 @@ animation:fadeLine 1s ease forwards;
 to{opacity:1;}
 }
 
-/* 💖 Final Name */
 #finalName{
 position:absolute;
-bottom:120px;   /* moved up from bottom */
-right:50px;     /* moved to right side */
-transform:scale(0.5);
-font-size:48px;
+top:9%;              /* align with photo */
+left:calc(50% + 90px);  /* push to right of photo */
+
+transform:translateY(-50%) scale(0.5);
+
+font-size:42px;
 font-weight:bold;
 opacity:0;
 color:#ff99cc;
-text-shadow:0 0 20px pink,0 0 40px #ff1493,0 0 80px #ff69b4;
+
+text-shadow:0 0 15px pink,0 0 30px #ff1493,0 0 60px #ff69b4;
 
 animation:
 fadeZoom 2.5s ease forwards 13s,
