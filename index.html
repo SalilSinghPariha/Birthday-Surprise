@@ -2,34 +2,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise</title>
+<title>Muskan Birthday Surprise</title>
 
 <style>
 
 body{
 margin:0;
 overflow:hidden;
-font-family: 'Georgia', serif;
-background:radial-gradient(circle at bottom,#0a0015,#000000);
+font-family:'Georgia',serif;
+background:radial-gradient(circle at bottom,#0a0015,#000);
 color:white;
 text-align:center;
 }
 
-/* 🌙 MOON */
+/* 🌙 Moon */
 #moon{
 position:absolute;
 top:60px;
 right:80px;
-width:100px;
-height:100px;
-background:radial-gradient(circle,#fff,#ddd,#aaa);
+width:90px;
+height:90px;
+background:radial-gradient(circle,#fff,#ddd,#bbb);
 border-radius:50%;
-box-shadow:0 0 40px rgba(255,255,255,0.6),
-0 0 80px rgba(255,255,255,0.4),
-0 0 120px rgba(255,255,255,0.2);
+box-shadow:
+0 0 30px rgba(255,255,255,0.4),
+0 0 60px rgba(255,255,255,0.2),
+0 0 100px rgba(255,255,255,0.1);
 }
 
-/* ⭐ STARS */
+/* ⭐ Stars */
 .star{
 position:absolute;
 width:2px;
@@ -38,36 +39,28 @@ background:white;
 border-radius:50%;
 animation:twinkle 2s infinite alternate;
 }
-
 @keyframes twinkle{
 from{opacity:0.2;}
 to{opacity:1;}
 }
 
-/* 🌠 SHOOTING STAR */
+/* 🌠 Shooting Star */
 .shooting-star{
 position:absolute;
-top:0;
+top:10%;
 left:0;
-width:3px;
-height:3px;
+width:2px;
+height:2px;
 background:white;
-box-shadow:0 0 10px white, 0 0 20px white;
-animation:shoot 1.5s linear forwards;
+box-shadow:0 0 8px white,0 0 20px white;
+animation:shoot 1.8s linear forwards;
 }
-
 @keyframes shoot{
-0%{
-transform:translate(0,0) scale(1);
-opacity:1;
-}
-100%{
-transform:translate(600px,300px) scale(0.5);
-opacity:0;
-}
+0%{transform:translate(0,0);opacity:1;}
+100%{transform:translate(900px,400px);opacity:0;}
 }
 
-/* intro */
+/* Intro */
 #intro{
 position:absolute;
 top:40%;
@@ -77,7 +70,7 @@ font-size:34px;
 font-style:italic;
 }
 
-/* gift */
+/* Gift */
 #gift{
 display:none;
 position:absolute;
@@ -88,7 +81,7 @@ font-size:90px;
 cursor:pointer;
 }
 
-/* FULL SCREEN */
+/* Popup */
 #popup{
 position:fixed;
 top:0;
@@ -100,20 +93,40 @@ display:none;
 overflow:hidden;
 }
 
-/* message */
+/* Photo */
+#photo{
+position:absolute;
+top:8%;
+left:50%;
+transform:translateX(-50%);
+width:130px;
+height:130px;
+border-radius:50%;
+border:3px solid white;
+box-shadow:0 0 25px pink;
+}
+
+/* Message (Glass effect) */
 #mainMessage{
 position:absolute;
-top:45%;
+top:42%;
 left:50%;
-transform:translate(-50%,-50%);
-width:80%;
-font-size:26px;
+transform:translateX(-50%);
+width:70%;
+font-size:24px;
 line-height:1.8;
 font-style:italic;
-text-shadow:0 0 10px rgba(255,192,203,0.6);
+text-align:center;
+
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+padding:20px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(255,192,203,0.15);
 }
 
 #mainMessage p{
+margin:10px 0;
 opacity:0;
 animation:fadeLine 1s ease forwards;
 }
@@ -129,31 +142,35 @@ animation:fadeLine 1s ease forwards;
 to{opacity:1;}
 }
 
-/* 💖 FINAL NAME */
+/* 💖 Final Name */
 #finalName{
 position:absolute;
-top:68%;
+bottom:70px;
 left:50%;
-transform:translateX(-50%);
+transform:translateX(-50%) scale(0.5);
 font-size:60px;
 font-weight:bold;
 opacity:0;
 color:#ff99cc;
-text-shadow:0 0 20px pink,0 0 40px #ff1493;
-animation:glowName 2s ease forwards 13s, pulse 1.5s infinite 15s;
+text-shadow:0 0 20px pink,0 0 40px #ff1493,0 0 80px #ff69b4;
+
+animation:
+fadeZoom 2.5s ease forwards 13s,
+pulse 2s infinite 16s;
 }
 
-@keyframes glowName{
-to{opacity:1;}
+@keyframes fadeZoom{
+0%{opacity:0; transform:translateX(-50%) scale(0.5);}
+100%{opacity:1; transform:translateX(-50%) scale(1);}
 }
 
 @keyframes pulse{
-0%{transform:translateX(-50%) scale(1)}
-50%{transform:translateX(-50%) scale(1.1)}
-100%{transform:translateX(-50%) scale(1)}
+0%{transform:translateX(-50%) scale(1);}
+50%{transform:translateX(-50%) scale(1.1);}
+100%{transform:translateX(-50%) scale(1);}
 }
 
-/* ✍️ SIGNATURE */
+/* ✍️ Signature */
 #signature{
 position:absolute;
 bottom:20px;
@@ -170,58 +187,30 @@ animation:fadeIn 3s forwards 16s;
 to{opacity:1;}
 }
 
-/* hearts */
+/* Hearts */
 .heart{
 position:absolute;
 bottom:-20px;
 font-size:18px;
 animation:floatUp linear infinite;
 }
-
 @keyframes floatUp{
-0%{transform:translateY(0)}
-100%{transform:translateY(-110vh); opacity:0}
+0%{transform:translateY(0);}
+100%{transform:translateY(-110vh);opacity:0;}
 }
 
-/* sparkle */
+/* Sparkle */
 .sparkle{
 position:absolute;
 font-size:16px;
 animation:sparkle 2s linear forwards;
 }
-
 @keyframes sparkle{
 0%{opacity:1;}
 100%{opacity:0; transform:translateY(-30px);}
 }
 
-/* photo */
-#photo{
-position:absolute;
-top:10%;
-left:50%;
-transform:translateX(-50%);
-width:130px;
-height:130px;
-border-radius:50%;
-border:3px solid white;
-box-shadow:0 0 25px pink;
-}
-
-/* cake */
-#cake{
-position:absolute;
-bottom:12%;
-left:50%;
-transform:translateX(-50%);
-font-size:65px;
-opacity:0;
-animation:fadeIn 2s forwards 10s;
-}
-
-audio{
-display:none;
-}
+audio{display:none;}
 
 </style>
 </head>
@@ -231,24 +220,22 @@ display:none;
 <div id="moon"></div>
 
 <div id="intro">✨ Click the Gift for Something Magical ❤️ ✨</div>
-
 <div id="gift">🎁</div>
 
 <div id="popup">
 
-<img id="photo" src="Photo.jpg">
+<img id="photo" src="photo.jpg">
 
 <div id="mainMessage">
-
 <p>Happy Birthday ❤️</p>
 <p>The day I saw you, I felt something special… now I know why.</p>
 <p>With time, that feeling only grows stronger. I feel happy when you're around.</p>
 <p>I may not say everything, but you have my heart, Muski ❤️</p>
 <p>I’ll always be there — for you and beside you.</p>
 <p>Even when time passes… you’ll still find me next to you. ❤️</p>
-
 </div>
 
+  
 <div id="finalName">Muski ❤️</div>
 <div id="signature">– Salil ❤️</div>
 
@@ -276,7 +263,7 @@ document.body.appendChild(star);
 }
 
 /* hearts */
-function createHeart(){
+setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";
 h.innerHTML="❤️";
@@ -284,11 +271,10 @@ h.style.left=Math.random()*100+"vw";
 h.style.animationDuration=(4+Math.random()*4)+"s";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),8000);
-}
-setInterval(createHeart,400);
+},400);
 
 /* sparkle */
-function sparkle(){
+setInterval(()=>{
 let s=document.createElement("div");
 s.className="sparkle";
 s.innerHTML="✨";
@@ -296,17 +282,28 @@ s.style.left=Math.random()*100+"vw";
 s.style.top=Math.random()*100+"vh";
 document.body.appendChild(s);
 setTimeout(()=>s.remove(),2000);
-}
-setInterval(sparkle,500);
+},500);
 
-/* 🌠 shooting star trigger */
+/* glow dots */
+setInterval(()=>{
+let d=document.createElement("div");
+d.style.position="absolute";
+d.style.width="3px";
+d.style.height="3px";
+d.style.background="pink";
+d.style.borderRadius="50%";
+d.style.left=Math.random()*100+"vw";
+d.style.top=Math.random()*100+"vh";
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),4000);
+},800);
+
+/* shooting star */
 function shootingStar(){
 let star=document.createElement("div");
 star.className="shooting-star";
-star.style.left="10vw";
-star.style.top="20vh";
 document.body.appendChild(star);
-setTimeout(()=>star.remove(),1500);
+setTimeout(()=>star.remove(),1800);
 }
 
 /* open gift */
@@ -317,7 +314,7 @@ setTimeout(()=>{
 popup.style.display="block";
 music.play();
 
-/* trigger shooting star when name appears */
+/* trigger star at emotional moment */
 setTimeout(shootingStar,13000);
 
 },800);
