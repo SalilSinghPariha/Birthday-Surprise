@@ -2,61 +2,105 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Romantic Birthday Surprise</title>
+<title>Birthday Surprise</title>
 
 <style>
 
 body{
 margin:0;
 overflow:hidden;
-font-family:'Segoe UI',sans-serif;
-background:linear-gradient(135deg,#000000,#1a001a,#330033);
+font-family: 'Georgia', serif;
+background:radial-gradient(circle at bottom,#0a0015,#000000);
 color:white;
 text-align:center;
 }
 
-/* intro */
+/* 🌙 MOON */
+#moon{
+position:absolute;
+top:60px;
+right:80px;
+width:100px;
+height:100px;
+background:radial-gradient(circle,#fff,#ddd,#aaa);
+border-radius:50%;
+box-shadow:0 0 40px rgba(255,255,255,0.6),
+0 0 80px rgba(255,255,255,0.4),
+0 0 120px rgba(255,255,255,0.2);
+}
 
+/* ⭐ STARS */
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2;}
+to{opacity:1;}
+}
+
+/* 🌠 SHOOTING STAR */
+.shooting-star{
+position:absolute;
+top:0;
+left:0;
+width:3px;
+height:3px;
+background:white;
+box-shadow:0 0 10px white, 0 0 20px white;
+animation:shoot 1.5s linear forwards;
+}
+
+@keyframes shoot{
+0%{
+transform:translate(0,0) scale(1);
+opacity:1;
+}
+100%{
+transform:translate(600px,300px) scale(0.5);
+opacity:0;
+}
+}
+
+/* intro */
 #intro{
 position:absolute;
 top:40%;
 left:50%;
 transform:translateX(-50%);
-font-size:36px;
+font-size:34px;
+font-style:italic;
 }
 
 /* gift */
-
 #gift{
 display:none;
 position:absolute;
 top:55%;
 left:50%;
 transform:translate(-50%,-50%);
-font-size:100px;
+font-size:90px;
 cursor:pointer;
-transition:.3s;
-}
-
-#gift:hover{
-transform:translate(-50%,-50%) scale(1.2);
 }
 
 /* FULL SCREEN */
-
 #popup{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:radial-gradient(circle,#2b002b,#000);
+background:radial-gradient(circle,#1a0026,#000);
 display:none;
 overflow:hidden;
 }
 
 /* message */
-
 #mainMessage{
 position:absolute;
 top:45%;
@@ -64,10 +108,10 @@ left:50%;
 transform:translate(-50%,-50%);
 width:80%;
 font-size:26px;
-line-height:1.7;
+line-height:1.8;
+font-style:italic;
+text-shadow:0 0 10px rgba(255,192,203,0.6);
 }
-
-/* line animation */
 
 #mainMessage p{
 opacity:0;
@@ -85,18 +129,17 @@ animation:fadeLine 1s ease forwards;
 to{opacity:1;}
 }
 
-/* WOW NAME */
-
+/* 💖 FINAL NAME */
 #finalName{
 position:absolute;
-top:70%;
+top:68%;
 left:50%;
 transform:translateX(-50%);
 font-size:60px;
 font-weight:bold;
 opacity:0;
-color:#ff66cc;
-text-shadow:0 0 20px pink,0 0 40px red,0 0 60px #ff1493;
+color:#ff99cc;
+text-shadow:0 0 20px pink,0 0 40px #ff1493;
 animation:glowName 2s ease forwards 13s, pulse 1.5s infinite 15s;
 }
 
@@ -110,14 +153,29 @@ to{opacity:1;}
 100%{transform:translateX(-50%) scale(1)}
 }
 
-/* floating hearts */
+/* ✍️ SIGNATURE */
+#signature{
+position:absolute;
+bottom:20px;
+right:30px;
+font-size:20px;
+font-style:italic;
+opacity:0;
+color:#ffb6c1;
+text-shadow:0 0 10px pink;
+animation:fadeIn 3s forwards 16s;
+}
 
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+/* hearts */
 .heart{
 position:absolute;
 bottom:-20px;
-font-size:20px;
+font-size:18px;
 animation:floatUp linear infinite;
-opacity:.8;
 }
 
 @keyframes floatUp{
@@ -126,55 +184,39 @@ opacity:.8;
 }
 
 /* sparkle */
-
 .sparkle{
 position:absolute;
-font-size:18px;
+font-size:16px;
 animation:sparkle 2s linear forwards;
 }
 
 @keyframes sparkle{
-0%{opacity:1; transform:scale(.5)}
-100%{opacity:0; transform:scale(1.5) translateY(-30px)}
+0%{opacity:1;}
+100%{opacity:0; transform:translateY(-30px);}
 }
 
 /* photo */
-
 #photo{
 position:absolute;
-top:12%;
+top:10%;
 left:50%;
 transform:translateX(-50%);
-width:140px;
-height:140px;
+width:130px;
+height:130px;
 border-radius:50%;
-border:4px solid white;
+border:3px solid white;
 box-shadow:0 0 25px pink;
 }
 
 /* cake */
-
 #cake{
 position:absolute;
 bottom:12%;
 left:50%;
 transform:translateX(-50%);
-font-size:70px;
+font-size:65px;
 opacity:0;
 animation:fadeIn 2s forwards 10s;
-}
-
-@keyframes fadeIn{
-to{opacity:1;}
-}
-
-/* overlay glow */
-
-#overlay{
-position:absolute;
-width:100%;
-height:100%;
-background:radial-gradient(circle,transparent,black 90%);
 }
 
 audio{
@@ -186,33 +228,30 @@ display:none;
 
 <body>
 
-<div id="intro">✨ Click the Gift for Something Special ❤️ ✨</div>
+<div id="moon"></div>
+
+<div id="intro">✨ Click the Gift for Something Magical ❤️ ✨</div>
 
 <div id="gift">🎁</div>
 
 <div id="popup">
-
-<div id="overlay"></div>
 
 <img id="photo" src="photo.jpg">
 
 <div id="mainMessage">
 
 <p>Happy Birthday ❤️</p>
-
 <p>The day I saw you, I felt something special… now I know why.</p>
-
 <p>With time, that feeling only grows stronger. I feel happy when you're around.</p>
-
 <p>I may not say everything, but you have my heart, Muski ❤️</p>
-
 <p>I’ll always be there — for you and beside you.</p>
-
 <p>Even when time passes… you’ll still find me next to you. ❤️</p>
 
 </div>
 
+<div id="cake">🎂</div>
 <div id="finalName">Muski ❤️</div>
+<div id="signature">– Salil ❤️</div>
 
 </div>
 
@@ -223,14 +262,21 @@ display:none;
 <script>
 
 /* intro */
-
 setTimeout(()=>{
 intro.style.display="none";
 gift.style.display="block";
 },2500);
 
-/* floating hearts */
+/* stars */
+for(let i=0;i<120;i++){
+let star=document.createElement("div");
+star.className="star";
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+document.body.appendChild(star);
+}
 
+/* hearts */
 function createHeart(){
 let h=document.createElement("div");
 h.className="heart";
@@ -240,10 +286,9 @@ h.style.animationDuration=(4+Math.random()*4)+"s";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),8000);
 }
-setInterval(createHeart,300);
+setInterval(createHeart,400);
 
 /* sparkle */
-
 function sparkle(){
 let s=document.createElement("div");
 s.className="sparkle";
@@ -253,19 +298,30 @@ s.style.top=Math.random()*100+"vh";
 document.body.appendChild(s);
 setTimeout(()=>s.remove(),2000);
 }
-setInterval(sparkle,400);
+setInterval(sparkle,500);
+
+/* 🌠 shooting star trigger */
+function shootingStar(){
+let star=document.createElement("div");
+star.className="shooting-star";
+star.style.left="10vw";
+star.style.top="20vh";
+document.body.appendChild(star);
+setTimeout(()=>star.remove(),1500);
+}
 
 /* open gift */
-
 gift.onclick=function(){
-
 this.innerHTML="💝";
 
 setTimeout(()=>{
 popup.style.display="block";
 music.play();
-},800);
 
+/* trigger shooting star when name appears */
+setTimeout(shootingStar,13000);
+
+},800);
 }
 
 </script>
