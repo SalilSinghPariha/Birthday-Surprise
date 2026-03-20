@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Muskan Birthday Surprise</title>
 
 <style>
@@ -112,7 +114,7 @@ from{box-shadow:0 0 15px pink;}
 to{box-shadow:0 0 35px #ff69b4;}
 }
 
-/* Message (Glass effect) */
+/* 💬 Message */
 #mainMessage{
 position:absolute;
 top:34%;
@@ -122,7 +124,6 @@ width:70%;
 font-size:23px;
 line-height:1.6;
 font-style:italic;
-text-align:center;
 
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(10px);
@@ -148,18 +149,17 @@ animation:fadeLine 1s ease forwards;
 to{opacity:1;}
 }
 
+
+/* 💖 Name */
 #finalName{
 position:absolute;
 top:9%;
-left:calc(50% + 140px);   /* increased from 90px → more right */
-
+left:65%;
 transform:translateY(-50%) scale(0.5);
-
 font-size:42px;
 font-weight:bold;
 opacity:0;
 color:#ff99cc;
-
 text-shadow:0 0 15px pink,0 0 30px #ff1493,0 0 60px #ff69b4;
 
 animation:
@@ -167,15 +167,20 @@ fadeZoom 2.5s ease forwards 13s,
 pulse 2s infinite 16s;
 }
 
+/* Animations */
 @keyframes fadeZoom{
-0%{opacity:0; transform:translateX(-50%) scale(0.5);}
-100%{opacity:1; transform:translateX(-50%) scale(1);}
+0%{opacity:0; transform:translateY(-50%) scale(0.5);}
+100%{opacity:1; transform:translateY(-50%) scale(1);}
 }
 
 @keyframes pulse{
-0%{transform:translateX(-50%) scale(1);}
-50%{transform:translateX(-50%) scale(1.1);}
-100%{transform:translateX(-50%) scale(1);}
+0%{transform:translateY(-50%) scale(1);}
+50%{transform:translateY(-50%) scale(1.1);}
+100%{transform:translateY(-50%) scale(1);}
+}
+
+@keyframes fadeIn{
+to{opacity:1;}
 }
 
 /* ✍️ Signature */
@@ -187,15 +192,10 @@ font-size:20px;
 font-style:italic;
 opacity:0;
 color:#ffb6c1;
-text-shadow:0 0 10px pink;
 animation:fadeIn 3s forwards 16s;
 }
 
-@keyframes fadeIn{
-to{opacity:1;}
-}
-
-/* Hearts */
+/* ❤️ Hearts */
 .heart{
 position:absolute;
 bottom:-20px;
@@ -203,19 +203,66 @@ font-size:18px;
 animation:floatUp linear infinite;
 }
 @keyframes floatUp{
-0%{transform:translateY(0);}
 100%{transform:translateY(-110vh);opacity:0;}
 }
 
-/* Sparkle */
+/* ✨ Sparkle */
 .sparkle{
 position:absolute;
 font-size:16px;
 animation:sparkle 2s linear forwards;
 }
 @keyframes sparkle{
-0%{opacity:1;}
 100%{opacity:0; transform:translateY(-30px);}
+}
+
+/* 📱 MOBILE */
+@media (max-width:600px){
+
+#photo{
+width:100px;
+height:100px;
+}
+
+#finalName{
+top:18%;
+left:50%;
+transform:translateX(-50%) scale(0.7);
+font-size:26px;
+}
+
+#mainMessage{
+top:30%;
+width:90%;
+font-size:18px;
+padding:12px;
+}
+
+#cake{
+bottom:120px;
+font-size:45px;
+}
+
+#signature{
+font-size:16px;
+right:15px;
+}
+
+#gift{
+font-size:70px;
+}
+
+#intro{
+font-size:22px;
+}
+
+#moon{
+width:60px;
+height:60px;
+top:30px;
+right:20px;
+}
+
 }
 
 audio{display:none;}
@@ -234,6 +281,8 @@ audio{display:none;}
 
 <img id="photo" src="Photo.jpg">
 
+<div id="finalName">Muski ❤️</div>
+
 <div id="mainMessage">
 <p>Happy Birthday ❤️</p>
 <p>The day I saw you, I felt something special… now I know why.</p>
@@ -243,7 +292,6 @@ audio{display:none;}
 <p>Even when time passes… you’ll still find me next to you. ❤️</p>
 </div>
 
-<div id="finalName">Muski ❤️</div>
 <div id="signature">– Salil ❤️</div>
 
 </div>
@@ -262,11 +310,11 @@ gift.style.display="block";
 
 /* stars */
 for(let i=0;i<120;i++){
-let star=document.createElement("div");
-star.className="star";
-star.style.left=Math.random()*100+"vw";
-star.style.top=Math.random()*100+"vh";
-document.body.appendChild(star);
+let s=document.createElement("div");
+s.className="star";
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+document.body.appendChild(s);
 }
 
 /* hearts */
@@ -275,7 +323,6 @@ let h=document.createElement("div");
 h.className="heart";
 h.innerHTML="❤️";
 h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=(4+Math.random()*4)+"s";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),8000);
 },400);
@@ -290,20 +337,6 @@ s.style.top=Math.random()*100+"vh";
 document.body.appendChild(s);
 setTimeout(()=>s.remove(),2000);
 },500);
-
-/* glow dots */
-setInterval(()=>{
-let d=document.createElement("div");
-d.style.position="absolute";
-d.style.width="3px";
-d.style.height="3px";
-d.style.background="pink";
-d.style.borderRadius="50%";
-d.style.left=Math.random()*100+"vw";
-d.style.top=Math.random()*100+"vh";
-document.body.appendChild(d);
-setTimeout(()=>d.remove(),4000);
-},800);
 
 /* shooting star */
 function shootingStar(){
@@ -320,10 +353,7 @@ this.innerHTML="💝";
 setTimeout(()=>{
 popup.style.display="block";
 music.play();
-
-/* perfect timing */
 setTimeout(shootingStar,13000);
-
 },800);
 }
 
