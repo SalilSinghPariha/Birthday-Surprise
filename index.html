@@ -96,7 +96,7 @@ overflow:hidden;
 /* Photo */
 #photo{
 position:absolute;
-top:8%;
+top:6%;
 left:50%;
 transform:translateX(-50%);
 width:130px;
@@ -104,29 +104,35 @@ height:130px;
 border-radius:50%;
 border:3px solid white;
 box-shadow:0 0 25px pink;
+animation:photoGlow 3s infinite alternate;
+}
+
+@keyframes photoGlow{
+from{box-shadow:0 0 15px pink;}
+to{box-shadow:0 0 35px #ff69b4;}
 }
 
 /* Message (Glass effect) */
 #mainMessage{
 position:absolute;
-top:42%;
+top:34%;
 left:50%;
 transform:translateX(-50%);
 width:70%;
-font-size:24px;
-line-height:1.8;
+font-size:23px;
+line-height:1.6;
 font-style:italic;
 text-align:center;
 
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(10px);
-padding:20px;
+padding:15px;
 border-radius:20px;
 box-shadow:0 0 30px rgba(255,192,203,0.15);
 }
 
 #mainMessage p{
-margin:10px 0;
+margin:6px 0;
 opacity:0;
 animation:fadeLine 1s ease forwards;
 }
@@ -224,7 +230,7 @@ audio{display:none;}
 
 <div id="popup">
 
-<img id="photo" src="Photo.jpg">
+<img id="photo" src="photo.jpg">
 
 <div id="mainMessage">
 <p>Happy Birthday ❤️</p>
@@ -235,7 +241,6 @@ audio{display:none;}
 <p>Even when time passes… you’ll still find me next to you. ❤️</p>
 </div>
 
-  
 <div id="finalName">Muski ❤️</div>
 <div id="signature">– Salil ❤️</div>
 
@@ -314,7 +319,7 @@ setTimeout(()=>{
 popup.style.display="block";
 music.play();
 
-/* trigger star at emotional moment */
+/* perfect timing */
 setTimeout(shootingStar,13000);
 
 },800);
