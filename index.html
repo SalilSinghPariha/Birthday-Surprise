@@ -2,15 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise</title>
+<title>Romantic Birthday Surprise</title>
 
 <style>
 
 body{
 margin:0;
 overflow:hidden;
-font-family:Arial;
-background:black;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#000000,#1a001a,#330033);
 color:white;
 text-align:center;
 }
@@ -22,8 +22,8 @@ position:absolute;
 top:40%;
 left:50%;
 transform:translateX(-50%);
-font-size:40px;
-font-weight:bold;
+font-size:38px;
+letter-spacing:2px;
 }
 
 /* gift */
@@ -34,49 +34,79 @@ position:absolute;
 top:55%;
 left:50%;
 transform:translate(-50%,-50%);
-font-size:120px;
+font-size:100px;
 cursor:pointer;
-transition:transform .3s;
+transition:.3s;
 }
 
 #gift:hover{
-transform:translate(-50%,-50%) scale(1.1);
+transform:translate(-50%,-50%) scale(1.2);
 }
 
-/* popup */
+/* FULL SCREEN BANNER */
 
 #popup{
 position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:650px;
-height:420px;
-background:#ff2d55;
-border-radius:25px;
-box-shadow:0 10px 50px rgba(0,0,0,0.8);
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle at center,#2b002b,#000000);
 display:none;
 overflow:hidden;
 }
 
-/* photo */
+/* center message */
 
-#photo{
-width:130px;
-height:130px;
-border-radius:50%;
-object-fit:cover;
-border:5px solid white;
+#mainMessage{
 position:absolute;
-top:20px;
+top:50%;
 left:50%;
-transform:translateX(-50%) scale(0);
-animation:photoZoom 1s forwards;
+transform:translate(-50%,-50%);
+font-size:42px;
+font-weight:bold;
+text-align:center;
+line-height:1.6;
+text-shadow:0 0 20px pink,0 0 40px red;
+animation:fadeIn 2s ease forwards;
+opacity:0;
 }
 
-@keyframes photoZoom{
-0%{transform:translateX(-50%) scale(0)}
-100%{transform:translateX(-50%) scale(1)}
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+/* romantic typing */
+
+#typeText{
+border-right:2px solid white;
+white-space:nowrap;
+overflow:hidden;
+animation:typing 6s steps(40,end), blink .8s infinite;
+}
+
+@keyframes typing{
+from{width:0}
+to{width:100%}
+}
+
+@keyframes blink{
+50%{border-color:transparent}
+}
+
+/* floating hearts */
+
+.heart{
+position:absolute;
+bottom:-20px;
+font-size:22px;
+animation:floatUp linear infinite;
+opacity:.8;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0) scale(.8)}
+100%{transform:translateY(-110vh) scale(1.3); opacity:0}
 }
 
 /* sparkle */
@@ -84,144 +114,65 @@ animation:photoZoom 1s forwards;
 .sparkle{
 position:absolute;
 font-size:18px;
-animation:sparkleMove 2s linear forwards;
+animation:sparkle 2s linear forwards;
 }
 
-@keyframes sparkleMove{
+@keyframes sparkle{
 0%{opacity:1; transform:scale(.5)}
 100%{opacity:0; transform:scale(1.5) translateY(-30px)}
 }
 
-/* glowing heart */
+/* photo */
 
-#heart{
+#photo{
 position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-font-size:180px;
-opacity:.15;
-animation:beat 1s infinite;
-}
-
-@keyframes beat{
-0%{transform:translate(-50%,-50%) scale(1)}
-50%{transform:translate(-50%,-50%) scale(1.2)}
-100%{transform:translate(-50%,-50%) scale(1)}
-}
-
-/* banner */
-
-#message{
-position:absolute;
-bottom:25px;
+top:15%;
 left:50%;
 transform:translateX(-50%);
-width:90%;
-background:white;
-color:red;
-font-weight:bold;
-font-size:20px;
-padding:12px;
-border-radius:12px;
-overflow:hidden;
-white-space:nowrap;
-}
-
-#scrollText{
-display:inline-block;
-padding-left:100%;
-animation:scrollText 12s linear infinite;
-}
-
-@keyframes scrollText{
-0%{transform:translateX(0)}
-100%{transform:translateX(-100%)}
-}
-
-/* balloons */
-
-.bgFloat{
-position:absolute;
-bottom:-50px;
-font-size:35px;
-animation:floatUp linear infinite;
-}
-
-@keyframes floatUp{
-0%{transform:translateY(0);opacity:1}
-100%{transform:translateY(-110vh);opacity:0}
-}
-
-/* confetti */
-
-@keyframes confettiFall{
-0%{transform:translateY(0) rotate(0);opacity:1}
-100%{transform:translateY(100vh) rotate(720deg);opacity:0}
-}
-
-/* dancing emojis */
-
-@keyframes dance{
-0%{transform:rotate(-20deg)}
-100%{transform:rotate(20deg)}
+width:140px;
+height:140px;
+border-radius:50%;
+border:4px solid white;
+box-shadow:0 0 20px pink;
 }
 
 /* cake */
 
 #cake{
 position:absolute;
-top:65%;
+bottom:10%;
 left:50%;
 transform:translateX(-50%);
-font-size:80px;
-display:none;
+font-size:70px;
+animation:fadeIn 3s;
 }
 
 /* love message */
 
-#loveMsg{
+#love{
 position:absolute;
-top:80%;
+bottom:5%;
 left:50%;
 transform:translateX(-50%);
-font-size:40px;
-font-weight:bold;
-text-shadow:0 0 10px pink,0 0 20px red;
-display:none;
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{opacity:.6}
-to{opacity:1}
-}
-
-/* fireworks */
-
-.firework{
-position:fixed;
-font-size:40px;
-animation:fireworkPop 2s linear forwards;
-}
-
-@keyframes fireworkPop{
-0%{transform:scale(.2);opacity:1}
-100%{transform:scale(2);opacity:0}
-}
-
-/* heart rain */
-
-.heartRain{
-position:fixed;
-top:-20px;
 font-size:28px;
-animation:heartFall 4s linear forwards;
+color:#ff99cc;
+text-shadow:0 0 10px red;
+animation:fadeIn 5s;
 }
 
-@keyframes heartFall{
-0%{transform:translateY(0);opacity:1}
-100%{transform:translateY(100vh);opacity:0}
+/* soft glow overlay */
+
+#overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:radial-gradient(circle, transparent, black 90%);
+}
+
+/* music hidden */
+
+audio{
+display:none;
 }
 
 </style>
@@ -229,28 +180,31 @@ animation:heartFall 4s linear forwards;
 
 <body>
 
-<div id="intro">✨ Muski ❤️ Please click Gift Icon for Surprise ✨</div>
+<div id="intro">✨ Muski ❤️ Click the Gift for Magic ✨</div>
 
 <div id="gift">🎁</div>
 
 <div id="popup">
 
+<div id="overlay"></div>
+
 <img id="photo" src="photo.jpg">
 
-<div id="heart">❤️</div>
+<div id="mainMessage">
+<div id="typeText">
+Happy Birthday My Love ❤️ <br>
+You Are My Heart, My Soul, My Everything 💖 <br>
+Forever Yours... Always Yours 💫
+</div>
+</div>
 
 <div id="cake">🎂</div>
-
-<div id="message">
-<div id="scrollText">
-🎉 Happy Happy Birthday 🎂 | 🥳 Wishing You a Fantastic Day! | ❤️ May Your Life Be Filled With Joy! | 🎈 Have an Amazing Celebration! | 🎉 Enjoy Your Special Day!
-</div>
-</div>
+<div id="love">I Love You Endless ❤️</div>
 
 </div>
 
 <audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3c1aab6c40.mp3?filename=happy-birthday-to-you-piano-version-13976.mp3">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3c1aab6c40.mp3">
 </audio>
 
 <script>
@@ -258,182 +212,45 @@ animation:heartFall 4s linear forwards;
 /* intro */
 
 setTimeout(()=>{
-document.getElementById("intro").style.display="none";
-document.getElementById("gift").style.display="block";
+intro.style.display="none";
+gift.style.display="block";
 },2500);
 
-/* floating balloons */
+/* floating hearts */
 
-const icons=["🎈","❤️","🥳","🎉"];
-
-function floatIcons(){
-
-let icon=document.createElement("div");
-
-icon.className="bgFloat";
-
-icon.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-
-icon.style.left=Math.random()*100+"vw";
-
-icon.style.animationDuration=(4+Math.random()*4)+"s";
-
-document.body.appendChild(icon);
-
-setTimeout(()=>icon.remove(),8000);
-
+function createHeart(){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),8000);
 }
-
-setInterval(floatIcons,400);
-
-/* confetti */
-
-function confettiBurst(){
-
-for(let i=0;i<80;i++){
-
-let c=document.createElement("div");
-
-c.innerHTML="🎊";
-
-c.style.position="fixed";
-
-c.style.left=Math.random()*100+"vw";
-
-c.style.top="-20px";
-
-c.style.fontSize="25px";
-
-c.style.animation="confettiFall 4s linear";
-
-document.body.appendChild(c);
-
-setTimeout(()=>c.remove(),4000);
-
-}
-
-}
-
-/* dancing emojis */
-
-function dancing(){
-
-let d=document.createElement("div");
-
-d.innerHTML="💃";
-
-d.style.position="fixed";
-
-d.style.left=Math.random()*100+"vw";
-
-d.style.top=Math.random()*100+"vh";
-
-d.style.fontSize="40px";
-
-d.style.animation="dance 1s infinite alternate";
-
-document.body.appendChild(d);
-
-setTimeout(()=>d.remove(),4000);
-
-}
-
-setInterval(dancing,900);
+setInterval(createHeart,300);
 
 /* sparkle */
 
 function sparkle(){
-
-let photo=document.getElementById("photo");
-
-let rect=photo.getBoundingClientRect();
-
 let s=document.createElement("div");
-
 s.className="sparkle";
-
 s.innerHTML="✨";
-
-s.style.left=(rect.left+Math.random()*130)+"px";
-
-s.style.top=(rect.top+Math.random()*130)+"px";
-
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
 document.body.appendChild(s);
-
 setTimeout(()=>s.remove(),2000);
-
 }
+setInterval(sparkle,400);
 
-setInterval(sparkle,300);
+/* open gift */
 
-/* fireworks */
+gift.onclick=function(){
 
-function firework(){
-
-let f=document.createElement("div");
-
-f.className="firework";
-
-f.innerHTML="🎆";
-
-f.style.left=Math.random()*100+"vw";
-
-f.style.top=Math.random()*80+"vh";
-
-document.body.appendChild(f);
-
-setTimeout(()=>f.remove(),2000);
-
-}
-
-setInterval(firework,1500);
-
-/* heart rain */
-
-function heartRain(){
-
-for(let i=0;i<40;i++){
-
-let h=document.createElement("div");
-
-h.className="heartRain";
-
-h.innerHTML="❤️";
-
-h.style.left=Math.random()*100+"vw";
-
-document.body.appendChild(h);
-
-setTimeout(()=>h.remove(),4000);
-
-}
-
-}
-
-document.body.addEventListener("click",heartRain);
-
-/* gift open */
-
-document.getElementById("gift").onclick=function(){
-
-this.innerHTML="📦";
+this.innerHTML="💝";
 
 setTimeout(()=>{
-
-document.getElementById("popup").style.display="block";
-
-document.getElementById("music").play();
-
-confettiBurst();
-
-setTimeout(()=>{
-document.getElementById("cake").style.display="block";
-},3000);
-
-setTimeout(()=>{
-document.getElementById("loveMsg").style.display="block";
-},6000);
-
+popup.style.display="block";
+music.play();
 },800);
 
 }
@@ -442,4 +259,3 @@ document.getElementById("loveMsg").style.display="block";
 
 </body>
 </html>
-
